@@ -1,5 +1,6 @@
 package com.iridium.iridiumskyblock.shop;
 
+import com.iridium.iridiumcore.dependencies.xseries.XMaterial;
 import com.iridium.iridiumcore.utils.InventoryUtils;
 import com.iridium.iridiumcore.utils.StringUtils;
 import com.iridium.iridiumskyblock.IridiumSkyblock;
@@ -13,6 +14,7 @@ import com.iridium.iridiumskyblock.shop.ShopItem.BuyCost;
 import com.iridium.iridiumskyblock.utils.PlayerUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
@@ -164,7 +166,8 @@ public class ShopManager {
      * @param amount   The amount of the item which is to be sold
      */
     public void sell(Player player, ShopItem shopItem, int amount) {
-        int inventoryAmount = InventoryUtils.getAmount(player.getInventory(), shopItem.type);
+        int inventoryAmount = getMaterialAmount(player.getInventory(), shopItem.type);
+
         if (inventoryAmount == 0) {
             player.sendMessage(StringUtils.color(IridiumSkyblock.getInstance().getMessages().noSuchItem.replace("%prefix%", IridiumSkyblock.getInstance().getConfiguration().prefix)));
             IridiumSkyblock.getInstance().getShop().failSound.play(player);
@@ -236,6 +239,21 @@ public class ShopManager {
         BigDecimal bigDecimal = BigDecimal.valueOf(value);
         bigDecimal = bigDecimal.setScale(places, RoundingMode.HALF_UP);
         return bigDecimal.doubleValue();
+    }
+
+    public static int getMaterialAmount(Inventory inventory, XMaterial material) {
+        int total = 0;
+        ItemStack[] var3 = inventory.getContents();
+        int var4 = var3.length;
+
+        for(int var5 = 0; var5 < var4; ++var5) {
+            ItemStack item = var3[var5];
+            if (item != null && material.isSimilar(item) && !item.hasItemMeta()) {
+                total += item.getAmount();
+            }
+        }
+
+        return total;
     }
 
 }
