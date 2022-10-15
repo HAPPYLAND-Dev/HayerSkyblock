@@ -10,6 +10,7 @@ import com.iridium.iridiumskyblock.configs.inventories.*;
 
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.Map;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Inventories {
@@ -40,24 +41,19 @@ public class Inventories {
     );
 
     public InventoryConfig islandMenu = new InventoryConfig(45, "&7Island Menu", background1, ImmutableMap.<String, Item>builder()
-            .put("is regen", new Item(XMaterial.GRASS_BLOCK, 12, 1, "&b&lIsland Regen", Collections.singletonList("&7Regenerate your island")))
-            .put("is boosters", new Item(XMaterial.EXPERIENCE_BOTTLE, 23, 1, "&b&lIsland Boosters", Collections.singletonList("&7View your island boosters")))
-            .put("is home", new Item(XMaterial.WHITE_BED, 13, 1, "&b&lIsland Home", Collections.singletonList("&7Teleport to your island home")))
-            .put("is members", new Item(XMaterial.PLAYER_HEAD, 14, 1, "&b&lIsland Members", "Peaches_MLG", Collections.singletonList("&7View your island members")))
-            .put("is warps", new Item(XMaterial.END_PORTAL_FRAME, 20, 1, "&b&lIsland Warps", Collections.singletonList("&7View your island warps")))
-            .put("is upgrade", new Item(XMaterial.DIAMOND, 21, 1, "&b&lIsland Upgrades", Collections.singletonList("&7View your island upgrades")))
-            .put("is missions", new Item(XMaterial.IRON_SWORD, 22, 1, "&b&lIsland Missions", Collections.singletonList("&7View your island missions")))
-            .put("is border", new Item(XMaterial.BEACON, 24, 1, "&b&lIsland Border", Collections.singletonList("&7Change your island border")))
-            .put("is bank", new Item(XMaterial.PLAYER_HEAD, 30, "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvODM4MWM1MjlkNTJlMDNjZDc0YzNiZjM4YmI2YmEzZmRlMTMzN2FlOWJmNTAzMzJmYWE4ODllMGEyOGU4MDgxZiJ9fX0", 1, "&b&lIsland Bank", Collections.singletonList("&7View your island bank")))
-            .put("is permissions", new Item(XMaterial.WRITABLE_BOOK, 31, 1, "&b&lIsland Permissions", Collections.singletonList("&7View your island permissions")))
-            .put("is trusted", new Item(XMaterial.NAME_TAG, 32, 1, "&b&lTrusted Members", Collections.singletonList("&7View your island's trusted members")))
-            .put("is delete", new Item(XMaterial.BARRIER, 44, 1, "&b&lDelete Island", Collections.singletonList("&7Delete your island")))
-            .build()
-    );
+            .put("is boosters", new Item(XMaterial.EXPERIENCE_BOTTLE, 11, 1, "&b&lIsland Boosters", Collections.singletonList("&7View your island boosters")))
+            .put("is home", new Item(XMaterial.WHITE_BED, 12, 1, "&b&lIsland Home", Collections.singletonList("&7Teleport to your island home")))
+            .put("is members", new Item(XMaterial.PLAYER_HEAD, 13, 1, "&b&lIsland Members", "Peaches_MLG", Collections.singletonList("&7View your island members")))
+            .put("is warps", new Item(XMaterial.END_PORTAL_FRAME, 14, 1, "&b&lIsland Warps", Collections.singletonList("&7View your island warps")))
+            .put("is upgrade", new Item(XMaterial.DIAMOND, 15, 1, "&b&lIsland Upgrades", Collections.singletonList("&7View your island upgrades")))
+            .put("is border", new Item(XMaterial.BEACON, 20, 1, "&b&lIsland Border", Collections.singletonList("&7Change your island border")))
+            .put("is bank", new Item(XMaterial.PLAYER_HEAD, 21, "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvODM4MWM1MjlkNTJlMDNjZDc0YzNiZjM4YmI2YmEzZmRlMTMzN2FlOWJmNTAzMzJmYWE4ODllMGEyOGU4MDgxZiJ9fX0", 1, "&b&lIsland Bank", Collections.singletonList("&7View your island bank")))
+            .put("is permissions", new Item(XMaterial.WRITABLE_BOOK, 22, 1, "&b&lIsland Permissions", Collections.singletonList("&7View your island permissions")))
+            .put("is trusted", new Item(XMaterial.NAME_TAG, 23, 1, "&b&lTrusted Members", Collections.singletonList("&7View your island's trusted members")))
+            .put("is biome", new Item(XMaterial.BUCKET, 24, 1, "&f&l岛屿群系", Collections.singletonList("&7修改你的岛屿生物群系")))
 
-    public InventoryConfig missionSelectGUI = new InventoryConfig(27, "&7Island Missions", background2, ImmutableMap.<String, Item>builder()
-            .put("is missions once", new Item(XMaterial.WRITABLE_BOOK, 15, 1, "&b&lQuests", Collections.emptyList()))
-            .put("is missions daily", new Item(XMaterial.DIAMOND_SWORD, 11, 1, "&b&lDaily Missions", Collections.emptyList()))
+            .put("is regen", new Item(XMaterial.WATER_BUCKET, 43, 1, "&b&lIsland Regen", Collections.singletonList("&7Regenerate your island")))
+            .put("is delete", new Item(XMaterial.LAVA_BUCKET, 44, 1, "&b&lDelete Island", Collections.singletonList("&7Delete your island")))
             .build()
     );
 
@@ -169,10 +165,6 @@ public class Inventories {
     )));
 
     public NoItemGUI islandSchematicGUI = new NoItemGUI(27, "&7Select a Schematic", background2);
-
-    public NoItemGUI dailyMissionGUI = new NoItemGUI(27, "&7Daily Island Missions", background2);
-
-    public NoItemGUI missionsGUI = new NoItemGUI(45, "&7Island Missions", background1);
 
     public NoItemGUI islandPermissionsGUI = new NoItemGUI(54, "&7Island Permissions", background1);
 

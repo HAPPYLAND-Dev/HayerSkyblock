@@ -120,7 +120,6 @@ public class Messages {
     public String removedBank = "%prefix% &7You took %amount% %item%'s from %player%.";
     public String extraValueInfo = "%prefix% &7The extra value of %player% is %amount%.";
     public String extraValueSet = "%prefix% &7You have set %player%'s island extra value to %amount%.";
-    public String invalidMissionType = "%prefix% &7That is not a valid mission type.";
     public String maxLevelReached = "%prefix% &7Maximum level reached.";
     public String cannotAfford = "%prefix% &7You cannot afford this.";
     public String unknownUpgrade = "%prefix% &7Unknown Island upgrade.";

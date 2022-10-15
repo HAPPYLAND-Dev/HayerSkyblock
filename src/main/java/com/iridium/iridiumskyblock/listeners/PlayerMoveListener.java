@@ -27,6 +27,7 @@ public class PlayerMoveListener implements Listener {
     public void onPlayerMove(PlayerMoveEvent event) {
         Player player = event.getPlayer();
         User user = IridiumSkyblock.getInstance().getUserManager().getUser(player);
+        if (!IridiumSkyblock.landWorld.contains(player.getWorld())) return;
         if (event.getTo().getBlockX() != event.getFrom().getBlockX() || event.getTo().getBlockZ() != event.getFrom().getBlockZ()) {
             if (user.getTeleportingTask() != null) {
                 user.getTeleportingTask().cancel();

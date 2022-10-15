@@ -43,8 +43,16 @@ public class PlayerPortalListener implements Listener {
 
         if (event.getCause() == PlayerTeleportEvent.TeleportCause.NETHER_PORTAL) {
             if (IridiumSkyblock.getInstance().getConfiguration().netherIslands) {
-                World world = Objects.equals(event.getFrom().getWorld(), islandManager.getNetherWorld()) ? islandManager.getWorld() : islandManager.getNetherWorld();
-                event.setTo(island.get().getCenter(world));
+                //World world = Objects.equals(event.getFrom().getWorld(), islandManager.getNetherWorld()) ? islandManager.getWorld() : islandManager.getNetherWorld();
+                World world = event.getFrom().getWorld();
+                if (world == null) return;
+                if (world.equals(islandManager.getNetherWorld())) {
+                    event.setTo(island.get().getCenter(islandManager.getWorld()));
+                }
+                if (world.equals(islandManager.getWorld())) {
+                    event.getPlayer().teleport(island.get().getCenter(islandManager.getNetherWorld()));
+                }
+
                 return;
             }
 

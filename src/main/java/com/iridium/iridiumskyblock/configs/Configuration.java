@@ -144,7 +144,6 @@ public class Configuration {
         public boolean resetIslandBank = false;
         public boolean resetVaultBalances = false;
         public boolean resetUpgrades = true;
-        public boolean resetMissions = true;
         public boolean resetBoosters = true;
         public boolean clearWarps = true;
         public boolean resetBorderColour = true;

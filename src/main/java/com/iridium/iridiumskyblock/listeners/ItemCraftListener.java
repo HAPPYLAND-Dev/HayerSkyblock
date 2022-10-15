@@ -34,7 +34,6 @@ public class ItemCraftListener implements Listener {
         Optional<Island> island = user.getIsland();
         XMaterial material = XMaterial.matchXMaterial(event.getRecipe().getResult().getType());
 
-        island.ifPresent(value -> IridiumSkyblock.getInstance().getMissionManager().handleMissionUpdates(value, "CRAFT", material.name(), amount));
     }
 
     @EventHandler(priority = EventPriority.LOW)

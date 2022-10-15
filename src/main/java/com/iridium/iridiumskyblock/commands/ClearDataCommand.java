@@ -52,7 +52,6 @@ public class ClearDataCommand extends Command {
         databaseManager.getIslandBlocksTableManager().clear();
         databaseManager.getIslandSpawnersTableManager().clear();
         databaseManager.getIslandBankTableManager().clear();
-        databaseManager.getIslandMissionTableManager().clear();
         databaseManager.getIslandRewardTableManager().clear();
         databaseManager.getIslandUpgradeTableManager().clear();
         databaseManager.getIslandTrustedTableManager().clear();

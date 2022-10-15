@@ -61,7 +61,6 @@ public class IridiumSkyblock extends IridiumCore {
     private CommandManager commandManager;
     private DatabaseManager databaseManager;
     private IslandManager islandManager;
-    private MissionManager missionManager;
     private UserManager userManager;
     private SchematicManager schematicManager;
     private ShopManager shopManager;
@@ -74,7 +73,6 @@ public class IridiumSkyblock extends IridiumCore {
     private Permissions permissions;
     private BlockValues blockValues;
     private BankItems bankItems;
-    private Missions missions;
     private Upgrades upgrades;
     private Boosters boosters;
     private Commands commands;
@@ -88,7 +86,6 @@ public class IridiumSkyblock extends IridiumCore {
     private List<BankItem> bankItemList;
     private Map<String, Permission> permissionList;
     private Map<String, Setting> settingsList;
-    private Map<String, Mission> missionsList;
     private Map<String, Upgrade<?>> upgradesList;
     private Map<String, Booster> boosterList;
 
@@ -137,6 +134,8 @@ public class IridiumSkyblock extends IridiumCore {
         this.chunkGenerator = configuration.generatorSettings.generatorType.getChunkGenerator();
     }
 
+    public static List<World> landWorld = new ArrayList<>();
+
     /**
      * Plugin startup logic.
      */
@@ -167,8 +166,6 @@ public class IridiumSkyblock extends IridiumCore {
             Bukkit.getPluginManager().disablePlugin(this);
             return;
         }
-
-        this.missionManager = new MissionManager();
 
         this.shopManager = new ShopManager();
         shopManager.reloadCategories();
@@ -219,8 +216,6 @@ public class IridiumSkyblock extends IridiumCore {
             }, 1);
         }
 
-        resetIslandMissions();
-
         if (!isTesting()) {
             Metrics metrics = new Metrics(this, 5825);
             metrics.addCustomChart(new SimplePie("database_type", () -> sql.driver.name()));
@@ -240,6 +235,11 @@ public class IridiumSkyblock extends IridiumCore {
         getLogger().info("Version: " + getDescription().getVersion());
         getLogger().info("");
         getLogger().info("----------------------------------------");
+
+        //add land world to a list
+        landWorld.add(IridiumSkyblock.getInstance().islandManager.getWorld());
+        landWorld.add(IridiumSkyblock.getInstance().islandManager.getEndWorld());
+        landWorld.add(IridiumSkyblock.getInstance().islandManager.getNetherWorld());
     }
 
     private void registerPlaceholderSupport() {
@@ -271,30 +271,6 @@ public class IridiumSkyblock extends IridiumCore {
                 return 0;
             }
         };
-    }
-
-    /**
-     * Automatically resets the Island missions in a defined time interval.
-     */
-    private void resetIslandMissions() {
-        Calendar c = Calendar.getInstance();
-        c.add(Calendar.DAY_OF_MONTH, 1);
-        c.set(Calendar.HOUR_OF_DAY, 0);
-        c.set(Calendar.MINUTE, 0);
-        c.set(Calendar.SECOND, 0);
-        c.set(Calendar.MILLISECOND, 0);
-
-        new Timer().schedule(new TimerTask() {
-            @Override
-            public void run() {
-                databaseManager.getIslandMissionTableManager().delete(
-                        databaseManager.getIslandMissionTableManager().getEntries().stream()
-                                .filter(islandMission -> islandMission.getType() == Mission.MissionType.DAILY)
-                                .collect(Collectors.toList())
-                );
-                Bukkit.getScheduler().runTask(IridiumSkyblock.getInstance(), () -> resetIslandMissions());
-            }
-        }, c.getTime());
     }
 
     /**
@@ -360,7 +336,6 @@ public class IridiumSkyblock extends IridiumCore {
         getDatabaseManager().getIslandBlocksTableManager().save();
         getDatabaseManager().getIslandSpawnersTableManager().save();
         getDatabaseManager().getIslandBankTableManager().save();
-        getDatabaseManager().getIslandMissionTableManager().save();
         getDatabaseManager().getIslandRewardTableManager().save();
         getDatabaseManager().getIslandUpgradeTableManager().save();
         getDatabaseManager().getIslandTrustedTableManager().save();
@@ -464,8 +439,6 @@ public class IridiumSkyblock extends IridiumCore {
             if (schematic.end.ignoreAirBlocks == null) schematic.end.ignoreAirBlocks = true;
         }
 
-        this.missionsList = new HashMap<>(missions.missions);
-
         this.upgradesList = new HashMap<>();
         if (upgrades.sizeUpgrade.enabled)
             upgradesList.put("size", upgrades.sizeUpgrade);
@@ -512,7 +485,6 @@ public class IridiumSkyblock extends IridiumCore {
         this.permissions = getPersist().load(Permissions.class);
         this.blockValues = getPersist().load(BlockValues.class);
         this.bankItems = getPersist().load(BankItems.class);
-        this.missions = getPersist().load(Missions.class);
         this.upgrades = getPersist().load(Upgrades.class);
         this.boosters = getPersist().load(Boosters.class);
         this.commands = getPersist().load(Commands.class);
@@ -617,7 +589,6 @@ public class IridiumSkyblock extends IridiumCore {
         getPersist().save(permissions);
         getPersist().save(blockValues);
         getPersist().save(bankItems);
-        getPersist().save(missions);
         getPersist().save(upgrades);
         getPersist().save(boosters);
         getPersist().save(commands);

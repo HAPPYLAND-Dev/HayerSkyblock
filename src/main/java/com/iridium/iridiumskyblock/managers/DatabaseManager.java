@@ -41,7 +41,6 @@ public class DatabaseManager {
     private ForeignIslandTableManager<IslandBooster, Integer> islandBoosterTableManager;
     private ForeignIslandTableManager<IslandInvite, Integer> islandInviteTableManager;
     private ForeignIslandTableManager<IslandLog, Integer> islandLogTableManager;
-    private ForeignIslandTableManager<IslandMission, Integer> islandMissionTableManager;
     private ForeignIslandTableManager<IslandPermission, Integer> islandPermissionTableManager;
     private ForeignIslandTableManager<IslandReward, Integer> islandRewardTableManager;
     private ForeignIslandTableManager<IslandSpawners, Integer> islandSpawnersTableManager;
@@ -81,7 +80,6 @@ public class DatabaseManager {
         this.islandBlocksTableManager = new ForeignIslandTableManager<>(connectionSource, IslandBlocks.class, Comparator.comparing(IslandBlocks::getIslandId).thenComparing(IslandBlocks::getMaterial));
         this.islandSpawnersTableManager = new ForeignIslandTableManager<>(connectionSource, IslandSpawners.class, Comparator.comparing(IslandSpawners::getIslandId).thenComparing(IslandSpawners::getSpawnerType));
         this.islandBankTableManager = new ForeignIslandTableManager<>(connectionSource, IslandBank.class, Comparator.comparing(IslandBank::getIslandId).thenComparing(IslandBank::getBankItem));
-        this.islandMissionTableManager = new ForeignIslandTableManager<>(connectionSource, IslandMission.class, Comparator.comparing(IslandMission::getIslandId).thenComparing(IslandMission::getMissionName).thenComparing(IslandMission::getMissionIndex));
         this.islandRewardTableManager = new ForeignIslandTableManager<>(connectionSource, IslandReward.class, Comparator.comparing(IslandReward::getIslandId));
         this.islandUpgradeTableManager = new ForeignIslandTableManager<>(connectionSource, IslandUpgrade.class, Comparator.comparing(IslandUpgrade::getIslandId).thenComparing(IslandUpgrade::getUpgrade));
         this.islandTrustedTableManager = new ForeignIslandTableManager<>(connectionSource, IslandTrusted.class, Comparator.comparing(IslandTrusted::getIslandId).thenComparing(islandTrusted -> islandTrusted.getUser().getUuid()));

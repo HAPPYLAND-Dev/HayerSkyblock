@@ -6,7 +6,7 @@ plugins {
 
 group = "com.iridium"
 version = "3.2.8"
-description = "IridiumSkyblock"
+description = "HayerSkyBlock"
 
 repositories {
     mavenLocal()

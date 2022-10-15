@@ -20,12 +20,8 @@ public class PlayerFishListener implements Listener {
         if (!IridiumSkyblockAPI.getInstance().isIslandWorld(event.getPlayer().getWorld())) return;
 
         Entity caughtEntity = event.getCaught();
-        if (caughtEntity == null || event.getState() != PlayerFishEvent.State.CAUGHT_FISH) return;
+        if (caughtEntity == null || event.getState() != PlayerFishEvent.State.CAUGHT_FISH);
 
-        User user = IridiumSkyblock.getInstance().getUserManager().getUser(event.getPlayer());
-        Optional<Island> island = user.getIsland();
-
-        island.ifPresent(value -> IridiumSkyblock.getInstance().getMissionManager().handleMissionUpdates(value, "FISH", ((Item) caughtEntity).getItemStack().getType().name(), 1));
     }
 
 }

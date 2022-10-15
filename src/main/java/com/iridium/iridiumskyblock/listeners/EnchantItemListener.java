@@ -23,8 +23,6 @@ public class EnchantItemListener implements Listener {
         User user = IridiumSkyblock.getInstance().getUserManager().getUser(player);
         Optional<Island> island = user.getIsland();
         XMaterial material = XMaterial.matchXMaterial(event.getItem().getType());
-
-        island.ifPresent(value -> IridiumSkyblock.getInstance().getMissionManager().handleMissionUpdates(value, "ENCHANT", material.name(), 1));
     }
 
 }

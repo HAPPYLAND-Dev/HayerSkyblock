@@ -41,7 +41,6 @@ public class Commands {
     public LevelCommand levelCommand = new LevelCommand();
     public LogsCommand logsCommand = new LogsCommand();
     public MembersCommand membersCommand = new MembersCommand();
-    public MissionCommand missionCommand = new MissionCommand();
     public PermissionsCommand permissionsCommand = new PermissionsCommand();
     public PrivateCommand privateCommand = new PrivateCommand();
     public PromoteCommand promoteCommand = new PromoteCommand();

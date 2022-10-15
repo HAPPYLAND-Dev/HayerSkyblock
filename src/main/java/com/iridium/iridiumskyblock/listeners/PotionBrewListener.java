@@ -18,15 +18,10 @@ public class PotionBrewListener implements Listener {
     public void monitorPotionBrew(BrewEvent event) {
         // Delay the check so the new potion is checked
         Bukkit.getScheduler().scheduleSyncDelayedTask(IridiumSkyblock.getInstance(), () -> {
-            Optional<Island> island = IridiumSkyblock.getInstance().getIslandManager().getIslandViaLocation(event.getBlock().getLocation());
 
             for (int i = 0; i < 3; i++) {
                 ItemStack itemStack = event.getContents().getItem(i);
                 if (itemStack != null && itemStack.getItemMeta() instanceof PotionMeta) {
-                    PotionMeta potionMeta = (PotionMeta) itemStack.getItemMeta();
-
-                    island.ifPresent(value -> IridiumSkyblock.getInstance().getMissionManager().handleMissionUpdates(value,
-                            "BREW", potionMeta.getBasePotionData().getType() + ":" + (potionMeta.getBasePotionData().isUpgraded() ? 2 : 1), 1));
                 }
             }
         });

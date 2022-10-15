@@ -61,10 +61,6 @@ public class BlockPlaceListener implements Listener {
         User user = IridiumSkyblock.getInstance().getUserManager().getUser(player);
         XMaterial material = XMaterial.matchXMaterial(event.getBlock().getType());
 
-        user.getIsland().ifPresent(island -> {
-            IridiumSkyblock.getInstance().getMissionManager().handleMissionUpdates(island, "PLACE", material.name(), 1);
-        });
-
         IridiumSkyblock.getInstance().getIslandManager().getIslandViaLocation(event.getBlock().getLocation()).ifPresent(island -> {
             IslandBlocks islandBlocks = IridiumSkyblock.getInstance().getIslandManager().getIslandBlock(island, material);
             islandBlocks.setAmount(islandBlocks.getAmount() + 1);

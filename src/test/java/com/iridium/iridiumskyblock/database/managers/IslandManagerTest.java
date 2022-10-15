@@ -1,4 +1,4 @@
-package com.iridium.iridiumskyblock.managers;
+package com.iridium.iridiumskyblock.database.managers;
 
 import be.seeseemelk.mockbukkit.MockBukkit;
 import be.seeseemelk.mockbukkit.ServerMock;

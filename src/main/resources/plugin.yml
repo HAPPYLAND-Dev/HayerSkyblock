@@ -1,4 +1,5 @@
-name: IridiumSkyblock
+name: HayerSkyBlock
+provides: [ IridiumSkyblock ]
 version: ${version}
 description: Skyblock Redefined
 main: com.iridium.iridiumskyblock.IridiumSkyblock
