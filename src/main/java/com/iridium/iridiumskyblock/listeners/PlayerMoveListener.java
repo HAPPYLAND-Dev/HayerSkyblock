@@ -49,7 +49,8 @@ public class PlayerMoveListener implements Listener {
                             .replace("%name%", island.get().getName())
                     ));
                     PlayerUtils.teleportSpawn(player);
-                } else {
+                }
+//                } else {
 //                    IslandSetting islandTimeSetting = IridiumSkyblock.getInstance().getIslandManager().getIslandSetting(island.get(), SettingType.TIME);
 //                    IslandSetting islandWeatherSetting = IridiumSkyblock.getInstance().getIslandManager().getIslandSetting(island.get(), SettingType.WEATHER);
 //                    IslandTime islandTime = IslandTime.valueOf(islandTimeSetting.getValue());
@@ -66,7 +67,7 @@ public class PlayerMoveListener implements Listener {
 //                    if ((islandTime == IslandTime.DEFAULT && player.getPlayerTime() != player.getWorld().getTime()) || player.getPlayerTime() != islandTime.getTime()) {
 //                        player.setPlayerTime(islandTime.getTime(), islandTime.isRelative());
 //                    }
-                }
+//                }
             }
             if (user.isFlying()) {
                 if (island.isPresent()) {
@@ -119,22 +120,23 @@ public class PlayerMoveListener implements Listener {
             p.resetPlayerTime();
         } else {
             Optional<Island> island = IridiumSkyblock.getInstance().getIslandManager().getIslandViaPlayerLocation(p);
-
-            IslandSetting islandTimeSetting = IridiumSkyblock.getInstance().getIslandManager().getIslandSetting(island.get(), SettingType.TIME);
-            IslandSetting islandWeatherSetting = IridiumSkyblock.getInstance().getIslandManager().getIslandSetting(island.get(), SettingType.WEATHER);
-            IslandTime islandTime = IslandTime.valueOf(islandTimeSetting.getValue());
-            IslandWeatherType islandWeatherType = IslandWeatherType.valueOf(islandWeatherSetting.getValue());
-            if (islandWeatherType == IslandWeatherType.DEFAULT) {
-                p.resetPlayerWeather();
-            } else {
-                WeatherType newWeatherType = islandWeatherType == IslandWeatherType.CLEAR ? WeatherType.CLEAR : WeatherType.DOWNFALL;
-                if (p.getPlayerWeather() != newWeatherType) {
-                    p.setPlayerWeather(newWeatherType);
+            if (island.isPresent()) {
+                IslandSetting islandTimeSetting = IridiumSkyblock.getInstance().getIslandManager().getIslandSetting(island.get(), SettingType.TIME);
+                IslandSetting islandWeatherSetting = IridiumSkyblock.getInstance().getIslandManager().getIslandSetting(island.get(), SettingType.WEATHER);
+                IslandTime islandTime = IslandTime.valueOf(islandTimeSetting.getValue());
+                IslandWeatherType islandWeatherType = IslandWeatherType.valueOf(islandWeatherSetting.getValue());
+                if (islandWeatherType == IslandWeatherType.DEFAULT) {
+                    p.resetPlayerWeather();
+                } else {
+                    WeatherType newWeatherType = islandWeatherType == IslandWeatherType.CLEAR ? WeatherType.CLEAR : WeatherType.DOWNFALL;
+                    if (p.getPlayerWeather() != newWeatherType) {
+                        p.setPlayerWeather(newWeatherType);
+                    }
                 }
-            }
 
-            if ((islandTime == IslandTime.DEFAULT && p.getPlayerTime() != p.getWorld().getTime()) || p.getPlayerTime() != islandTime.getTime()) {
-                p.setPlayerTime(islandTime.getTime(), islandTime.isRelative());
+                if ((islandTime == IslandTime.DEFAULT && p.getPlayerTime() != p.getWorld().getTime()) || p.getPlayerTime() != islandTime.getTime()) {
+                    p.setPlayerTime(islandTime.getTime(), islandTime.isRelative());
+                }
             }
         }
     }
