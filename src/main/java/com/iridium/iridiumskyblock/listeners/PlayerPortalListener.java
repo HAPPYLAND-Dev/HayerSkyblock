@@ -8,6 +8,9 @@ import com.iridium.iridiumskyblock.database.User;
 import com.iridium.iridiumskyblock.managers.CooldownProvider;
 import com.iridium.iridiumskyblock.managers.IslandManager;
 import com.iridium.iridiumskyblock.utils.LocationUtils;
+import io.papermc.lib.PaperLib;
+import org.bukkit.Location;
+import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -46,11 +49,11 @@ public class PlayerPortalListener implements Listener {
                 //World world = Objects.equals(event.getFrom().getWorld(), islandManager.getNetherWorld()) ? islandManager.getWorld() : islandManager.getNetherWorld();
                 World world = event.getFrom().getWorld();
                 if (world == null) return;
-                if (world.equals(islandManager.getNetherWorld())) {
+                if (world == islandManager.getNetherWorld()) {
                     event.setTo(island.get().getCenter(islandManager.getWorld()));
                 }
-                if (world.equals(islandManager.getWorld())) {
-                    event.getPlayer().teleport(island.get().getCenter(islandManager.getNetherWorld()));
+                if (world == islandManager.getWorld()) {
+                    event.setTo(island.get().getCenter(islandManager.getNetherWorld()));
                 }
 
                 return;

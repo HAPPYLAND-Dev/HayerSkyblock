@@ -12,7 +12,7 @@ repositories {
     mavenLocal()
     mavenCentral()
     maven("https://repo.mvdw-software.com/content/groups/public/")
-    maven("https://hub.spigotmc.org/nexus/content/repositories/snapshots/")
+    maven("https://repo.papermc.io/repository/maven-public/")
     maven("https://repo.extendedclip.com/content/repositories/placeholderapi/")
     maven("https://ci.ender.zone/plugin/repository/everything/")
     maven("https://jitpack.io")
@@ -36,13 +36,10 @@ dependencies {
 
     // Other dependencies that are not required or already available at runtime
     compileOnly("org.projectlombok:lombok:1.18.22")
-    compileOnly("org.spigotmc:spigot-api:1.19-R0.1-SNAPSHOT")
+    compileOnly("io.papermc.paper:paper-api:1.19.2-R0.1-SNAPSHOT")
     compileOnly("net.ess3:EssentialsXSpawn:2.16.1")
     compileOnly("com.github.MilkBowl:VaultAPI:1.7")
     compileOnly("me.clip:placeholderapi:2.9.2")
-//    compileOnly("be.maximvdw:MVdWPlaceholderAPI:2.1.1-SNAPSHOT") {
-//        exclude("org.spigotmc")
-//    }
     compileOnly("com.gc:AdvancedSpawners:1.2.6")
     compileOnly("dev.rosewood:rosestacker:1.4.2")
     compileOnly("com.github.OmerBenGera:WildStackerAPI:master")
@@ -103,8 +100,8 @@ tasks {
     }
 
     compileJava {
-        sourceCompatibility = JavaVersion.VERSION_1_8.toString()
-        targetCompatibility = JavaVersion.VERSION_1_8.toString()
+        sourceCompatibility = JavaVersion.VERSION_17.toString()
+        targetCompatibility = JavaVersion.VERSION_17.toString()
     }
 
     compileTestJava {

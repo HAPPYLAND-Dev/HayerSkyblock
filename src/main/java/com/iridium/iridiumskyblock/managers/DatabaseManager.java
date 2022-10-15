@@ -107,7 +107,7 @@ public class DatabaseManager {
     }
 
     private void convertDatabaseData(SQL.Driver driver) {
-        Path versionFile = Paths.get("plugins", "IridiumSkyblock", "sql_version.txt");
+        Path versionFile = Paths.get("plugins", "HayerSkyBlock", "sql_version.txt");
         try {
             Files.write(versionFile, Collections.singleton(String.valueOf(version)), StandardOpenOption.CREATE_NEW);
             DataConverter.updateDatabaseData(1, version, connectionSource, driver);
