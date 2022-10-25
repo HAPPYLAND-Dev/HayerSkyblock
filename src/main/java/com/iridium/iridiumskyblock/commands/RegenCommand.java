@@ -6,6 +6,7 @@ import com.iridium.iridiumskyblock.PermissionType;
 import com.iridium.iridiumskyblock.configs.Schematics;
 import com.iridium.iridiumskyblock.database.Island;
 import com.iridium.iridiumskyblock.database.User;
+import com.iridium.iridiumskyblock.gui.ConfirmationGUI;
 import com.iridium.iridiumskyblock.gui.IslandRegenGUI;
 import java.time.Duration;
 import java.util.ArrayList;
@@ -52,7 +53,7 @@ public class RegenCommand extends Command {
                 return false;
             }
 
-            player.openInventory(new IslandRegenGUI(player, getCooldownProvider()).getInventory());
+            player.openInventory(new ConfirmationGUI(() -> player.openInventory(new IslandRegenGUI(player, getCooldownProvider()).getInventory()), getCooldownProvider()).getInventory());
             return false;
         }
 
@@ -62,8 +63,10 @@ public class RegenCommand extends Command {
             return false;
         }
 
-        IridiumSkyblock.getInstance().getIslandManager().regenerateIsland(island.get(), user, schematicConfig.get());
-        return true;
+        player.openInventory(new ConfirmationGUI(() -> IridiumSkyblock.getInstance().getIslandManager().regenerateIsland(island.get(), user, schematicConfig.get()), getCooldownProvider()).getInventory());
+
+        // Always return false because the cooldown is set by the ConfirmationGUI
+        return false;
     }
 
     /**
