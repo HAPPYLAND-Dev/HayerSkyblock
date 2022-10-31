@@ -53,7 +53,6 @@ public class Configuration {
     public IslandDamageSettings pvpSettings = new IslandDamageSettings();
 
     public int distance = 151;
-    public int islandRecalculateInterval = 5;
     public int maxIslandName = 16;
     public int minIslandName = 3;
     public int teleportDelay = 0;
