@@ -23,6 +23,7 @@ import com.iridium.iridiumskyblock.support.WildStackerSupport;
 import com.iridium.iridiumskyblock.utils.PlayerUtils;
 import de.jeff_media.updatechecker.UpdateChecker;
 import lombok.Getter;
+import net.kyori.adventure.text.minimessage.MiniMessage;
 import net.milkbowl.vault.economy.Economy;
 import org.bstats.bukkit.Metrics;
 import org.bstats.charts.SimplePie;
@@ -99,6 +100,7 @@ public class IridiumSkyblock extends IridiumCore {
     public IridiumSkyblock() {
         instance = this;
     }
+    public static MiniMessage mm = MiniMessage.miniMessage();
 
     /**
      * The unit test constructor.
@@ -214,19 +216,6 @@ public class IridiumSkyblock extends IridiumCore {
                 registerMultiverse(islandManager.getNetherWorld());
                 registerMultiverse(islandManager.getEndWorld());
             }, 1);
-        }
-
-        if (!isTesting()) {
-            Metrics metrics = new Metrics(this, 5825);
-            metrics.addCustomChart(new SimplePie("database_type", () -> sql.driver.name()));
-
-            if (getConfiguration().enableCheckVersion) {
-                UpdateChecker.init(this, 62480)
-                        .checkEveryXHours(24)
-                        .setDownloadLink(62480)
-                        .setColoredConsoleOutput(true)
-                        .checkNow();
-            }
         }
 
         getLogger().info("----------------------------------------");

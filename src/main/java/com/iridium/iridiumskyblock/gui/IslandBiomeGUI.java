@@ -7,12 +7,19 @@ import com.iridium.iridiumcore.utils.Placeholder;
 import com.iridium.iridiumskyblock.IridiumSkyblock;
 import com.iridium.iridiumskyblock.database.Island;
 import com.iridium.iridiumskyblock.managers.CooldownProvider;
+import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.format.TextDecoration;
+import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
 import org.apache.commons.lang.WordUtils;
+import org.bukkit.Material;
 import org.bukkit.World;
+import org.bukkit.block.Biome;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.Inventory;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -56,7 +63,19 @@ public class IslandBiomeGUI extends IslandGUI {
                 .skip((page - 1) * elementsPerPage)
                 .limit(elementsPerPage)
                 .forEach(xBiome ->
-                        inventory.setItem(index.getAndIncrement(), ItemStackUtils.makeItem(IridiumSkyblock.getInstance().getInventories().biomeGUI.item, Collections.singletonList(new Placeholder("biome", WordUtils.capitalizeFully(xBiome.name().toLowerCase().replace("_", " "))))))
+//                        inventory.setItem(index.getAndIncrement(), ItemStackUtils.makeItem(IridiumSkyblock.getInstance().getInventories().biomeGUI.item, Collections.singletonList(new Placeholder("biome", WordUtils.capitalizeFully(xBiome.name().toLowerCase().replace("_", " "))))))
+                        {
+                            Biome biome = xBiome.getBiome();
+                            if (biome != null) {
+                                Component name = Component.translatable(biome.translationKey());
+                                ItemStack itemStack = new ItemStack(Material.ELDER_GUARDIAN_SPAWN_EGG);
+                                ItemMeta itemMeta = itemStack.getItemMeta();
+                                itemMeta.displayName(name.decoration(TextDecoration.ITALIC, false));
+                                itemStack.setItemMeta(itemMeta);
+                                inventory.setItem(index.getAndIncrement(), itemStack);
+                            }
+                        }
+
                 );
 
         if (IridiumSkyblock.getInstance().getConfiguration().backButtons && getPreviousInventory() != null) {
