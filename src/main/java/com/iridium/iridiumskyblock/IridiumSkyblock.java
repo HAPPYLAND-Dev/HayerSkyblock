@@ -186,6 +186,14 @@ public class IridiumSkyblock extends IridiumCore {
         // Send island border to all players
         Bukkit.getOnlinePlayers().forEach(player -> getIslandManager().getIslandViaLocation(player.getLocation()).ifPresent(island -> PlayerUtils.sendBorder(player, island)));
 
+        Bukkit.getScheduler().runTaskTimerAsynchronously(this, () -> {
+            islands.forEach(user -> {
+                if (user.getPlayer() != null && !user.getPlayer().isOnline()) {
+                    islands.remove(user);
+                }
+            });
+        }, 1L, 12000L);
+
 //        // Auto recalculate islands
 //        if (getConfiguration().islandRecalculateInterval > 0) {
 //            Bukkit.getScheduler().scheduleSyncRepeatingTask(this, new Runnable() {

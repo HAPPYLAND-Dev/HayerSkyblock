@@ -468,6 +468,7 @@ public class IslandManager {
         }
         if (land.isEmpty()) {
             land = IridiumSkyblock.getInstance().getDatabaseManager().getIslandTableManager().getEntries().stream().filter(island -> island.isInIsland(location)).findFirst();
+            land.ifPresent(island -> IridiumSkyblock.islands.addAll(island.getMembers()));
         }
         return land;
 //        return IridiumSkyblock.getInstance().getDatabaseManager().getIslandTableManager().getEntries().stream().filter(island -> island.isInIsland(location)).findFirst();
