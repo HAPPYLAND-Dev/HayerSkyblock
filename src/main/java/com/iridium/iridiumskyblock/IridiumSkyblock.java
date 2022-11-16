@@ -10,6 +10,7 @@ import com.iridium.iridiumskyblock.bank.BankItem;
 import com.iridium.iridiumskyblock.commands.CommandManager;
 import com.iridium.iridiumskyblock.configs.*;
 import com.iridium.iridiumskyblock.database.Island;
+import com.iridium.iridiumskyblock.database.User;
 import com.iridium.iridiumskyblock.generators.IridiumChunkGenerator;
 import com.iridium.iridiumskyblock.gui.GUI;
 import com.iridium.iridiumskyblock.listeners.*;
@@ -101,6 +102,7 @@ public class IridiumSkyblock extends IridiumCore {
         instance = this;
     }
     public static MiniMessage mm = MiniMessage.miniMessage();
+    public static List<User> islands = new ArrayList<>();
 
     /**
      * The unit test constructor.

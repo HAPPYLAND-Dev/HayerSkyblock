@@ -9,6 +9,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
+import org.bukkit.event.player.PlayerQuitEvent;
 
 public class PlayerJoinQuitListener implements Listener {
 
@@ -17,6 +18,7 @@ public class PlayerJoinQuitListener implements Listener {
         Player player = event.getPlayer();
         User user = IridiumSkyblock.getInstance().getUserManager().getUser(player);
         user.setBypassing(false);
+        IridiumSkyblock.islands.add(user);
 
         // Update the internal username in case of name change
         user.setName(event.getPlayer().getName());
@@ -31,5 +33,12 @@ public class PlayerJoinQuitListener implements Listener {
                             player.sendMessage(StringUtils.color(IridiumSkyblock.getInstance().getConfiguration().prefix + " &7Thanks for using IridiumSkyblock, if you like the plugin, consider donating at &bwww.patreon.com/Peaches_MLG"))
                     , 5);
         }
+    }
+
+    @EventHandler
+    public void onQuit(PlayerQuitEvent event) {
+        Player player = event.getPlayer();
+        User user = IridiumSkyblock.getInstance().getUserManager().getUser(player);
+        Bukkit.getScheduler().runTaskLater(IridiumSkyblock.getInstance(), () -> IridiumSkyblock.islands.remove(user), 12000L);
     }
 }

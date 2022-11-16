@@ -459,7 +459,18 @@ public class IslandManager {
      */
     public @NotNull Optional<Island> getIslandViaLocation(@NotNull Location location) {
         if (!IridiumSkyblockAPI.getInstance().isIslandWorld(location.getWorld())) return Optional.empty();
-        return IridiumSkyblock.getInstance().getDatabaseManager().getIslandTableManager().getEntries().stream().filter(island -> island.isInIsland(location)).findFirst();
+        Optional<Island> land = Optional.empty();
+        for (User user: IridiumSkyblock.islands) {
+            var island = user.getIsland();
+            if (island.isPresent() && island.get().isInIsland(location)) {
+                land = island;
+            }
+        }
+        if (land.isEmpty()) {
+            land = IridiumSkyblock.getInstance().getDatabaseManager().getIslandTableManager().getEntries().stream().filter(island -> island.isInIsland(location)).findFirst();
+        }
+        return land;
+//        return IridiumSkyblock.getInstance().getDatabaseManager().getIslandTableManager().getEntries().stream().filter(island -> island.isInIsland(location)).findFirst();
     }
 
     /**
