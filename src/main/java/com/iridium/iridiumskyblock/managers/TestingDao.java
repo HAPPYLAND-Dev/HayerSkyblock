@@ -19,52 +19,52 @@ import java.util.concurrent.Callable;
 
 public class TestingDao<T, ID> implements Dao<T, ID> {
     @Override
-    public T queryForId(ID id) throws SQLException {
+    public T queryForId(ID id) {
         return null;
     }
 
     @Override
-    public T queryForFirst(PreparedQuery<T> preparedQuery) throws SQLException {
+    public T queryForFirst(PreparedQuery<T> preparedQuery) {
         return null;
     }
 
     @Override
-    public List<T> queryForAll() throws SQLException {
+    public List<T> queryForAll() {
         return null;
     }
 
     @Override
-    public T queryForFirst() throws SQLException {
+    public T queryForFirst() {
         return null;
     }
 
     @Override
-    public List<T> queryForEq(String fieldName, Object value) throws SQLException {
+    public List<T> queryForEq(String fieldName, Object value) {
         return null;
     }
 
     @Override
-    public List<T> queryForMatching(T matchObj) throws SQLException {
+    public List<T> queryForMatching(T matchObj) {
         return null;
     }
 
     @Override
-    public List<T> queryForMatchingArgs(T matchObj) throws SQLException {
+    public List<T> queryForMatchingArgs(T matchObj) {
         return null;
     }
 
     @Override
-    public List<T> queryForFieldValues(Map<String, Object> fieldValues) throws SQLException {
+    public List<T> queryForFieldValues(Map<String, Object> fieldValues) {
         return null;
     }
 
     @Override
-    public List<T> queryForFieldValuesArgs(Map<String, Object> fieldValues) throws SQLException {
+    public List<T> queryForFieldValuesArgs(Map<String, Object> fieldValues) {
         return null;
     }
 
     @Override
-    public T queryForSameId(T data) throws SQLException {
+    public T queryForSameId(T data) {
         return null;
     }
 
@@ -84,72 +84,72 @@ public class TestingDao<T, ID> implements Dao<T, ID> {
     }
 
     @Override
-    public List<T> query(PreparedQuery<T> preparedQuery) throws SQLException {
+    public List<T> query(PreparedQuery<T> preparedQuery) {
         return null;
     }
 
     @Override
-    public int create(T data) throws SQLException {
+    public int create(T data) {
         return 0;
     }
 
     @Override
-    public int create(Collection<T> datas) throws SQLException {
+    public int create(Collection<T> datas) {
         return 0;
     }
 
     @Override
-    public T createIfNotExists(T data) throws SQLException {
+    public T createIfNotExists(T data) {
         return null;
     }
 
     @Override
-    public CreateOrUpdateStatus createOrUpdate(T data) throws SQLException {
+    public CreateOrUpdateStatus createOrUpdate(T data) {
         return null;
     }
 
     @Override
-    public int update(T data) throws SQLException {
+    public int update(T data) {
         return 0;
     }
 
     @Override
-    public int updateId(T data, ID newId) throws SQLException {
+    public int updateId(T data, ID newId) {
         return 0;
     }
 
     @Override
-    public int update(PreparedUpdate<T> preparedUpdate) throws SQLException {
+    public int update(PreparedUpdate<T> preparedUpdate) {
         return 0;
     }
 
     @Override
-    public int refresh(T data) throws SQLException {
+    public int refresh(T data) {
         return 0;
     }
 
     @Override
-    public int delete(T data) throws SQLException {
+    public int delete(T data) {
         return 0;
     }
 
     @Override
-    public int deleteById(ID id) throws SQLException {
+    public int deleteById(ID id) {
         return 0;
     }
 
     @Override
-    public int delete(Collection<T> datas) throws SQLException {
+    public int delete(Collection<T> datas) {
         return 0;
     }
 
     @Override
-    public int deleteIds(Collection<ID> ids) throws SQLException {
+    public int deleteIds(Collection<ID> ids) {
         return 0;
     }
 
     @Override
-    public int delete(PreparedDelete<T> preparedDelete) throws SQLException {
+    public int delete(PreparedDelete<T> preparedDelete) {
         return 0;
     }
 
@@ -164,12 +164,12 @@ public class TestingDao<T, ID> implements Dao<T, ID> {
     }
 
     @Override
-    public CloseableIterator<T> iterator(PreparedQuery<T> preparedQuery) throws SQLException {
+    public CloseableIterator<T> iterator(PreparedQuery<T> preparedQuery) {
         return null;
     }
 
     @Override
-    public CloseableIterator<T> iterator(PreparedQuery<T> preparedQuery, int resultFlags) throws SQLException {
+    public CloseableIterator<T> iterator(PreparedQuery<T> preparedQuery, int resultFlags) {
         return null;
     }
 
@@ -184,57 +184,57 @@ public class TestingDao<T, ID> implements Dao<T, ID> {
     }
 
     @Override
-    public void closeLastIterator() throws IOException {
+    public void closeLastIterator() {
 
     }
 
     @Override
-    public GenericRawResults<String[]> queryRaw(String query, String... arguments) throws SQLException {
+    public GenericRawResults<String[]> queryRaw(String query, String... arguments) {
         return null;
     }
 
     @Override
-    public <UO> GenericRawResults<UO> queryRaw(String query, RawRowMapper<UO> mapper, String... arguments) throws SQLException {
+    public <UO> GenericRawResults<UO> queryRaw(String query, RawRowMapper<UO> mapper, String... arguments) {
         return null;
     }
 
     @Override
-    public <UO> GenericRawResults<UO> queryRaw(String query, DataType[] columnTypes, RawRowObjectMapper<UO> mapper, String... arguments) throws SQLException {
+    public <UO> GenericRawResults<UO> queryRaw(String query, DataType[] columnTypes, RawRowObjectMapper<UO> mapper, String... arguments) {
         return null;
     }
 
     @Override
-    public GenericRawResults<Object[]> queryRaw(String query, DataType[] columnTypes, String... arguments) throws SQLException {
+    public GenericRawResults<Object[]> queryRaw(String query, DataType[] columnTypes, String... arguments) {
         return null;
     }
 
     @Override
-    public <UO> GenericRawResults<UO> queryRaw(String query, DatabaseResultsMapper<UO> mapper, String... arguments) throws SQLException {
+    public <UO> GenericRawResults<UO> queryRaw(String query, DatabaseResultsMapper<UO> mapper, String... arguments) {
         return null;
     }
 
     @Override
-    public long queryRawValue(String query, String... arguments) throws SQLException {
+    public long queryRawValue(String query, String... arguments) {
         return 0;
     }
 
     @Override
-    public int executeRaw(String statement, String... arguments) throws SQLException {
+    public int executeRaw(String statement, String... arguments) {
         return 0;
     }
 
     @Override
-    public int executeRawNoArgs(String statement) throws SQLException {
+    public int executeRawNoArgs(String statement) {
         return 0;
     }
 
     @Override
-    public int updateRaw(String statement, String... arguments) throws SQLException {
+    public int updateRaw(String statement, String... arguments) {
         return 0;
     }
 
     @Override
-    public <CT> CT callBatchTasks(Callable<CT> callable) throws Exception {
+    public <CT> CT callBatchTasks(Callable<CT> callable) {
         return null;
     }
 
@@ -244,12 +244,12 @@ public class TestingDao<T, ID> implements Dao<T, ID> {
     }
 
     @Override
-    public boolean objectsEqual(T data1, T data2) throws SQLException {
+    public boolean objectsEqual(T data1, T data2) {
         return false;
     }
 
     @Override
-    public ID extractId(T data) throws SQLException {
+    public ID extractId(T data) {
         return null;
     }
 
@@ -269,37 +269,37 @@ public class TestingDao<T, ID> implements Dao<T, ID> {
     }
 
     @Override
-    public boolean isTableExists() throws SQLException {
+    public boolean isTableExists() {
         return false;
     }
 
     @Override
-    public long countOf() throws SQLException {
+    public long countOf() {
         return 0;
     }
 
     @Override
-    public long countOf(PreparedQuery<T> preparedQuery) throws SQLException {
+    public long countOf(PreparedQuery<T> preparedQuery) {
         return 0;
     }
 
     @Override
-    public void assignEmptyForeignCollection(T parent, String fieldName) throws SQLException {
+    public void assignEmptyForeignCollection(T parent, String fieldName) {
 
     }
 
     @Override
-    public <FT> ForeignCollection<FT> getEmptyForeignCollection(String fieldName) throws SQLException {
+    public <FT> ForeignCollection<FT> getEmptyForeignCollection(String fieldName) {
         return null;
     }
 
     @Override
-    public void setObjectCache(boolean enabled) throws SQLException {
+    public void setObjectCache(boolean enabled) {
 
     }
 
     @Override
-    public void setObjectCache(ObjectCache objectCache) throws SQLException {
+    public void setObjectCache(ObjectCache objectCache) {
 
     }
 
@@ -314,12 +314,12 @@ public class TestingDao<T, ID> implements Dao<T, ID> {
     }
 
     @Override
-    public T mapSelectStarRow(DatabaseResults results) throws SQLException {
+    public T mapSelectStarRow(DatabaseResults results) {
         return null;
     }
 
     @Override
-    public GenericRowMapper<T> getSelectStarRowMapper() throws SQLException {
+    public GenericRowMapper<T> getSelectStarRowMapper() {
         return null;
     }
 
@@ -329,37 +329,37 @@ public class TestingDao<T, ID> implements Dao<T, ID> {
     }
 
     @Override
-    public boolean idExists(ID id) throws SQLException {
+    public boolean idExists(ID id) {
         return false;
     }
 
     @Override
-    public DatabaseConnection startThreadConnection() throws SQLException {
+    public DatabaseConnection startThreadConnection() {
         return null;
     }
 
     @Override
-    public void endThreadConnection(DatabaseConnection connection) throws SQLException {
+    public void endThreadConnection(DatabaseConnection connection) {
 
     }
 
     @Override
-    public void setAutoCommit(DatabaseConnection connection, boolean autoCommit) throws SQLException {
+    public void setAutoCommit(DatabaseConnection connection, boolean autoCommit) {
 
     }
 
     @Override
-    public boolean isAutoCommit(DatabaseConnection connection) throws SQLException {
+    public boolean isAutoCommit(DatabaseConnection connection) {
         return false;
     }
 
     @Override
-    public void commit(DatabaseConnection connection) throws SQLException {
+    public void commit(DatabaseConnection connection) {
 
     }
 
     @Override
-    public void rollBack(DatabaseConnection connection) throws SQLException {
+    public void rollBack(DatabaseConnection connection) {
 
     }
 
@@ -394,7 +394,7 @@ public class TestingDao<T, ID> implements Dao<T, ID> {
     }
 
     @Override
-    public T createObjectInstance() throws SQLException {
+    public T createObjectInstance() {
         return null;
     }
 

@@ -40,7 +40,7 @@ public class DeleteCommand extends Command {
     public boolean execute(CommandSender sender, String[] args) {
         if (args.length == 2 && sender.hasPermission("iridiumskyblock.delete.other")) {
             Optional<Island> islandOptional = IridiumSkyblockAPI.getInstance().getUser(Bukkit.getOfflinePlayer(args[1])).getIsland();
-            if (!islandOptional.isPresent()) {
+            if (islandOptional.isEmpty()) {
                 sender.sendMessage(StringUtils.color(IridiumSkyblock.getInstance().getMessages().userNoIsland.replace("%prefix%", IridiumSkyblock.getInstance().getConfiguration().prefix)));
             } else {
                 IridiumSkyblock.getInstance().getIslandManager().deleteIsland(islandOptional.get(), null);
@@ -58,7 +58,7 @@ public class DeleteCommand extends Command {
         Player player = (Player) sender;
         User user = IridiumSkyblock.getInstance().getUserManager().getUser(player);
         Optional<Island> island = user.getIsland();
-        if (!island.isPresent()) {
+        if (island.isEmpty()) {
             player.sendMessage(StringUtils.color(IridiumSkyblock.getInstance().getMessages().noIsland.replace("%prefix%", IridiumSkyblock.getInstance().getConfiguration().prefix)));
             return false;
         }

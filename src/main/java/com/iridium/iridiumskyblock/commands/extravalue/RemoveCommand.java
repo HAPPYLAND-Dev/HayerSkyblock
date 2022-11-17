@@ -41,7 +41,7 @@ public class RemoveCommand extends Command {
         OfflinePlayer player = Bukkit.getOfflinePlayer(args[2]);
         User user = IridiumSkyblock.getInstance().getUserManager().getUser(player);
         Optional<Island> optionalIsland = user.getIsland();
-        if (!optionalIsland.isPresent()) {
+        if (optionalIsland.isEmpty()) {
             sender.sendMessage(StringUtils.color(IridiumSkyblock.getInstance().getMessages().userNoIsland.replace("%prefix%", IridiumSkyblock.getInstance().getConfiguration().prefix)));
             return false;
         }

@@ -23,7 +23,7 @@ public class LocationUtils {
             XMaterial.END_PORTAL,
             XMaterial.WATER,
             XMaterial.LAVA
-    ).map(XMaterial::parseMaterial).collect(Collectors.toList());
+    ).map(XMaterial::parseMaterial).toList();
 
     /**
      * Is a location safe to teleport a player to

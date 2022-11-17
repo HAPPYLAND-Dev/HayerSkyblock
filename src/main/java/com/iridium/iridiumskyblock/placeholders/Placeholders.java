@@ -184,8 +184,7 @@ public class Placeholders {
             {
                 // Island manager caches this
                 List<Island> topIslands = IridiumSkyblock.getInstance().getIslandManager().getIslands(IslandManager.SortType.VALUE);
-                Optional<Island> island = Optional.ofNullable(topIslands.size() >= index ? topIslands.get(index - 1) : null);
-                return island;
+                return Optional.ofNullable(topIslands.size() >= index ? topIslands.get(index - 1) : null);
             }));
         }
         return hashmap;

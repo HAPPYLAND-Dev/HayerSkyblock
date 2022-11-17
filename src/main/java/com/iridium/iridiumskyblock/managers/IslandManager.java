@@ -20,9 +20,6 @@ import com.iridium.iridiumskyblock.database.*;
 import com.iridium.iridiumskyblock.generators.OceanGenerator;
 import com.iridium.iridiumskyblock.utils.LocationUtils;
 import com.iridium.iridiumskyblock.utils.PlayerUtils;
-import com.sk89q.worldedit.WorldEdit;
-import com.sk89q.worldedit.regions.CuboidRegion;
-import com.sk89q.worldedit.regions.Region;
 import org.bukkit.*;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockState;
@@ -40,9 +37,7 @@ import org.jetbrains.annotations.Nullable;
 import java.time.LocalDateTime;
 import java.util.*;
 import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.ThreadLocalRandom;
 import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
 /**
  * Class which handles islands and their worlds.
@@ -460,16 +455,14 @@ public class IslandManager {
     public @NotNull Optional<Island> getIslandViaLocation(@NotNull Location location) {
         if (!IridiumSkyblockAPI.getInstance().isIslandWorld(location.getWorld())) return Optional.empty();
         Optional<Island> land = Optional.empty();
-        for (User user: IridiumSkyblock.islands) {
+        for (User user: IridiumSkyblock.users) {
             var island = user.getIsland();
             if (island.isPresent() && island.get().isInIsland(location)) {
-                land = island;
+                return island;
             }
         }
-        if (land.isEmpty()) {
-            land = IridiumSkyblock.getInstance().getDatabaseManager().getIslandTableManager().getEntries().stream().filter(island -> island.isInIsland(location)).findFirst();
-            land.ifPresent(island -> IridiumSkyblock.islands.addAll(island.getMembers()));
-        }
+        land = IridiumSkyblock.getInstance().getDatabaseManager().getIslandTableManager().getEntries().stream().filter(island -> island.isInIsland(location)).findFirst();
+        land.ifPresent(island -> IridiumSkyblock.users.addAll(island.getMembers()));
         return land;
 //        return IridiumSkyblock.getInstance().getDatabaseManager().getIslandTableManager().getEntries().stream().filter(island -> island.isInIsland(location)).findFirst();
     }
@@ -897,7 +890,7 @@ public class IslandManager {
         }
 
         Reward reward = null;
-        List<Map.Entry<Integer, Reward>> entries = IridiumSkyblock.getInstance().getConfiguration().islandLevelRewards.entrySet().stream().sorted(Map.Entry.comparingByKey()).collect(Collectors.toList());
+        List<Map.Entry<Integer, Reward>> entries = IridiumSkyblock.getInstance().getConfiguration().islandLevelRewards.entrySet().stream().sorted(Map.Entry.comparingByKey()).toList();
         for (Map.Entry<Integer, Reward> entry : entries) {
             if (newLevel % entry.getKey() == 0) {
                 reward = entry.getValue();

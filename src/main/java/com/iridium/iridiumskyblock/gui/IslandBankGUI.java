@@ -54,24 +54,20 @@ public class IslandBankGUI extends IslandGUI {
         Optional<BankItem> bankItemOptional = IridiumSkyblock.getInstance().getBankItemList().stream()
                 .filter(item -> item.getItem().slot == event.getSlot())
                 .findFirst();
-        if (!bankItemOptional.isPresent()) return;
+        if (bankItemOptional.isEmpty()) return;
 
         BankItem bankItem = bankItemOptional.get();
         IslandBank islandBank = IridiumSkyblock.getInstance().getIslandManager().getIslandBank(getIsland(), bankItem);
 
         switch (event.getClick()) {
-            case LEFT:
-                IridiumSkyblock.getInstance().getCommands().withdrawCommand.execute(event.getWhoClicked(), new String[]{"", bankItem.getName(), String.valueOf(bankItem.getDefaultAmount())});
-                break;
-            case SHIFT_LEFT:
-                IridiumSkyblock.getInstance().getCommands().withdrawCommand.execute(event.getWhoClicked(), new String[]{"", bankItem.getName(), String.valueOf(islandBank.getNumber())});
-                break;
-            case RIGHT:
-                IridiumSkyblock.getInstance().getCommands().depositCommand.execute(event.getWhoClicked(), new String[]{"", bankItem.getName(), String.valueOf(bankItem.getDefaultAmount())});
-                break;
-            case SHIFT_RIGHT:
-                IridiumSkyblock.getInstance().getCommands().depositCommand.execute(event.getWhoClicked(), new String[]{"", bankItem.getName(), String.valueOf(islandBank.getNumber())});
-                break;
+            case LEFT ->
+                    IridiumSkyblock.getInstance().getCommands().withdrawCommand.execute(event.getWhoClicked(), new String[]{"", bankItem.getName(), String.valueOf(bankItem.getDefaultAmount())});
+            case SHIFT_LEFT ->
+                    IridiumSkyblock.getInstance().getCommands().withdrawCommand.execute(event.getWhoClicked(), new String[]{"", bankItem.getName(), String.valueOf(islandBank.getNumber())});
+            case RIGHT ->
+                    IridiumSkyblock.getInstance().getCommands().depositCommand.execute(event.getWhoClicked(), new String[]{"", bankItem.getName(), String.valueOf(bankItem.getDefaultAmount())});
+            case SHIFT_RIGHT ->
+                    IridiumSkyblock.getInstance().getCommands().depositCommand.execute(event.getWhoClicked(), new String[]{"", bankItem.getName(), String.valueOf(islandBank.getNumber())});
         }
 
         addContent(event.getInventory());

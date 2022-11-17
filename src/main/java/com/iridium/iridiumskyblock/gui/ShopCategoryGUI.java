@@ -93,7 +93,7 @@ public class ShopCategoryGUI extends GUI {
                 .filter(item -> item.slot == event.getSlot())
                 .findAny();
 
-        if (!clickedItem.isPresent()) {
+        if (clickedItem.isEmpty()) {
             return;
         }
 

@@ -2,16 +2,11 @@ package com.iridium.iridiumskyblock.listeners;
 
 import com.iridium.iridiumskyblock.IridiumSkyblock;
 import com.iridium.iridiumskyblock.SettingType;
-import com.iridium.iridiumskyblock.database.Island;
 import com.iridium.iridiumskyblock.database.IslandSetting;
-import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockFromToEvent;
-
-import java.util.HashMap;
-import java.util.Optional;
 
 public class BlockFromToListener implements Listener {
 

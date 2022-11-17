@@ -85,7 +85,13 @@ public final class User extends DatabaseObject {
      */
     public @NotNull Optional<Island> getIsland() {
         if (island == null) return Optional.empty();
-        return IridiumSkyblock.getInstance().getIslandManager().getIslandById(island);
+        if (IridiumSkyblock.u2l.containsKey(island)) {
+            return IridiumSkyblock.u2l.get(island);
+        } else {
+            Optional<Island> land = IridiumSkyblock.getInstance().getIslandManager().getIslandById(island);
+            IridiumSkyblock.u2l.put(island, land);
+            return land;
+        }
     }
 
     /**

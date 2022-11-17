@@ -10,7 +10,6 @@ import com.iridium.iridiumskyblock.configs.inventories.*;
 
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.Map;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Inventories {

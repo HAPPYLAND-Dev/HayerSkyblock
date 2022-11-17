@@ -26,7 +26,7 @@ public class EntityTargetListener implements Listener {
         if (IridiumSkyblock.getInstance().getConfiguration().pvpSettings.mobsVisitorTargeting) return;
 
         Optional<Island> island = IridiumSkyblock.getInstance().getIslandManager().getIslandViaLocation(event.getEntity().getLocation());
-        if (!island.isPresent()) return;
+        if (island.isEmpty()) return;
         if (event.getTarget() == null || !(event.getTarget() instanceof Player)) return;
 
         Player targetPlayer = (Player) event.getTarget();
@@ -45,8 +45,7 @@ public class EntityTargetListener implements Listener {
                 .filter(player -> player != targetPlayer)
                 .filter(player -> island.get().equals(IridiumSkyblock.getInstance().getUserManager().getUser(player).getIsland().orElse(null)))
                 .filter(player -> IridiumSkyblock.getInstance().getIslandManager().getIslandTrusted(island.get(), IridiumSkyblock.getInstance().getUserManager().getUser(player)).isPresent())
-                .filter(player -> player.hasLineOfSight(event.getEntity()))
-                .collect(Collectors.toList());
+                .filter(player -> player.hasLineOfSight(event.getEntity())).toList();
 
         if (nextTargets.isEmpty()) {
 	        event.setCancelled(true);

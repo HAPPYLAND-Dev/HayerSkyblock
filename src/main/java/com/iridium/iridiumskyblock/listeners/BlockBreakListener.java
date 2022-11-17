@@ -7,7 +7,6 @@ import com.iridium.iridiumskyblock.PermissionType;
 import com.iridium.iridiumskyblock.api.IridiumSkyblockAPI;
 import com.iridium.iridiumskyblock.database.*;
 import org.bukkit.block.CreatureSpawner;
-import org.bukkit.block.data.Ageable;
 import org.bukkit.block.data.BlockData;
 import org.bukkit.entity.Hanging;
 import org.bukkit.entity.ItemFrame;
@@ -29,7 +28,7 @@ public class BlockBreakListener implements Listener {
         Player player = event.getPlayer();
         User user = IridiumSkyblock.getInstance().getUserManager().getUser(player);
         Optional<Island> island = IridiumSkyblock.getInstance().getIslandManager().getIslandViaLocation(event.getBlock().getLocation());
-        if (!island.isPresent()) return;
+        if (island.isEmpty()) return;
 
         XMaterial material = XMaterial.matchXMaterial(event.getBlock().getType());
         if (!IridiumSkyblock.getInstance().getIslandManager().getIslandPermission(island.get(), user, PermissionType.BLOCK_BREAK)) {
@@ -87,7 +86,7 @@ public class BlockBreakListener implements Listener {
             Hanging hangingEntity = event.getEntity();
             User user = IridiumSkyblock.getInstance().getUserManager().getUser(remover);
             Optional<Island> island = IridiumSkyblock.getInstance().getIslandManager().getIslandViaLocation(hangingEntity.getLocation());
-            if (!island.isPresent()) return;
+            if (island.isEmpty()) return;
 
             if (!IridiumSkyblock.getInstance().getIslandManager().getIslandPermission(island.get(), user, PermissionType.BLOCK_BREAK)) {
                 event.setCancelled(true);

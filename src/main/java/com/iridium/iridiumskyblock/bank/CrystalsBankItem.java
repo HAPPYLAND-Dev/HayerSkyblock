@@ -77,7 +77,7 @@ public class CrystalsBankItem extends BankItem {
     @Override
     public double deposit(Player player, Number amount) {
         Optional<Island> islandOptional = IridiumSkyblock.getInstance().getUserManager().getUser(player).getIsland();
-        if (!islandOptional.isPresent()) {
+        if (islandOptional.isEmpty()) {
             player.sendMessage(StringUtils.color(IridiumSkyblock.getInstance().getMessages().noIsland.replace("%prefix%", IridiumSkyblock.getInstance().getConfiguration().prefix)));
             return 0;
         }

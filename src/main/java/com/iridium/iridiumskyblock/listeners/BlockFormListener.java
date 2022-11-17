@@ -3,18 +3,14 @@ package com.iridium.iridiumskyblock.listeners;
 import com.iridium.iridiumcore.dependencies.xseries.XMaterial;
 import com.iridium.iridiumskyblock.IridiumSkyblock;
 import com.iridium.iridiumskyblock.api.IridiumSkyblockAPI;
-import com.iridium.iridiumskyblock.database.Island;
 import com.iridium.iridiumskyblock.upgrades.OresUpgrade;
 import com.iridium.iridiumskyblock.utils.RandomAccessList;
-import org.bukkit.Location;
 import org.bukkit.Material;
-import org.bukkit.World;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockFormEvent;
 
 import java.util.HashMap;
-import java.util.Locale;
 import java.util.Map;
 import java.util.Optional;
 
@@ -43,7 +39,7 @@ public class BlockFormListener implements Listener {
                 if (randomMaterialList == null) return;
 
                 Optional<XMaterial> xMaterialOptional = randomMaterialList.nextElement();
-                if (!xMaterialOptional.isPresent()) return;
+                if (xMaterialOptional.isEmpty()) return;
 
                 Material material = xMaterialOptional.get().parseMaterial();
                 if (material == Material.COBBLESTONE && newMaterial == XMaterial.STONE) material = Material.STONE;

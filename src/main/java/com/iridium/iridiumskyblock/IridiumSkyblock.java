@@ -4,7 +4,6 @@ import com.iridium.iridiumcore.Color;
 import com.iridium.iridiumcore.IridiumCore;
 import com.iridium.iridiumcore.dependencies.xseries.XMaterial;
 import com.iridium.iridiumcore.utils.NumberFormatter;
-import com.iridium.iridiumskyblock.api.IridiumSkyblockAPI;
 import com.iridium.iridiumskyblock.api.IridiumSkyblockReloadEvent;
 import com.iridium.iridiumskyblock.bank.BankItem;
 import com.iridium.iridiumskyblock.commands.CommandManager;
@@ -22,12 +21,9 @@ import com.iridium.iridiumskyblock.support.RoseStackerSupport;
 import com.iridium.iridiumskyblock.support.StackerSupport;
 import com.iridium.iridiumskyblock.support.WildStackerSupport;
 import com.iridium.iridiumskyblock.utils.PlayerUtils;
-import de.jeff_media.updatechecker.UpdateChecker;
 import lombok.Getter;
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import net.milkbowl.vault.economy.Economy;
-import org.bstats.bukkit.Metrics;
-import org.bstats.charts.SimplePie;
 import org.bukkit.Bukkit;
 import org.bukkit.World;
 import org.bukkit.entity.EntityType;
@@ -49,7 +45,6 @@ import java.nio.file.Path;
 import java.nio.file.StandardCopyOption;
 import java.sql.SQLException;
 import java.util.*;
-import java.util.stream.Collectors;
 
 /**
  * The main class of this plugin which handles initialization
@@ -102,7 +97,8 @@ public class IridiumSkyblock extends IridiumCore {
         instance = this;
     }
     public static MiniMessage mm = MiniMessage.miniMessage();
-    public static List<User> islands = new ArrayList<>();
+    public static List<User> users = new ArrayList<>();
+    public static HashMap<Integer, Optional<Island>> u2l = new HashMap<>();
 
     /**
      * The unit test constructor.
@@ -187,9 +183,9 @@ public class IridiumSkyblock extends IridiumCore {
         Bukkit.getOnlinePlayers().forEach(player -> getIslandManager().getIslandViaLocation(player.getLocation()).ifPresent(island -> PlayerUtils.sendBorder(player, island)));
 
         Bukkit.getScheduler().runTaskTimerAsynchronously(this, () -> {
-            islands.forEach(user -> {
+            users.forEach(user -> {
                 if (user.getPlayer() != null && !user.getPlayer().isOnline()) {
-                    islands.remove(user);
+                    users.remove(user);
                 }
             });
         }, 1L, 12000L);

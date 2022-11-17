@@ -46,7 +46,7 @@ public class UnBanCommand extends Command {
         Player player = (Player) sender;
         User user = IridiumSkyblock.getInstance().getUserManager().getUser(player);
         Optional<Island> island = user.getIsland();
-        if (!island.isPresent()) {
+        if (island.isEmpty()) {
             player.sendMessage(StringUtils.color(IridiumSkyblock.getInstance().getMessages().noIsland.replace("%prefix%", IridiumSkyblock.getInstance().getConfiguration().prefix)));
             return false;
         }
@@ -64,7 +64,7 @@ public class UnBanCommand extends Command {
 
         User targetUser = IridiumSkyblock.getInstance().getUserManager().getUser(targetPlayer);
         Optional<IslandBan> islandBan = IridiumSkyblock.getInstance().getIslandManager().getIslandBan(island.get(), targetUser);
-        if (!islandBan.isPresent()) {
+        if (islandBan.isEmpty()) {
             sender.sendMessage(StringUtils.color(IridiumSkyblock.getInstance().getMessages().notBanned.replace("%prefix%", IridiumSkyblock.getInstance().getConfiguration().prefix)));
             return false;
         }

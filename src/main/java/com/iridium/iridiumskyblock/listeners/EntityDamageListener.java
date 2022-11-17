@@ -33,7 +33,7 @@ public class EntityDamageListener implements Listener {
         }
 
         Optional<Island> island = IridiumSkyblock.getInstance().getIslandManager().getIslandViaLocation(event.getEntity().getLocation());
-        if (!island.isPresent()) return;
+        if (island.isEmpty()) return;
 
         if (event.getEntity() instanceof Player) {
             handlePlayerDamage(event, island.get());
@@ -45,7 +45,7 @@ public class EntityDamageListener implements Listener {
         if (event.getEntity().equals(event.getDamager())) return;
 
         Optional<Island> island = IridiumSkyblock.getInstance().getIslandManager().getIslandViaLocation(event.getEntity().getLocation());
-        if (!island.isPresent()) return;
+        if (island.isEmpty()) return;
 
         if (event.getEntity() instanceof Player) {
             Player victim = (Player) event.getEntity();

@@ -73,8 +73,7 @@ public class IslandLogsGUI extends IslandGUI {
 
         List<IslandLog> islandLogs = IridiumSkyblock.getInstance().getDatabaseManager().getIslandLogTableManager().getEntries(getIsland()).stream()
                 .filter(islandLog -> Arrays.stream(logActions).anyMatch(logAction -> logAction.equals(islandLog.getLogAction())))
-                .sorted(Comparator.comparing(IslandLog::getTime).reversed())
-                .collect(Collectors.toList());
+                .sorted(Comparator.comparing(IslandLog::getTime).reversed()).toList();
 
         int index = 0;
         for (IslandLog islandLog : islandLogs) {
@@ -195,8 +194,7 @@ public class IslandLogsGUI extends IslandGUI {
     private boolean canChangePage(int page, int change, LogAction... logActions) {
         List<IslandLog> islandLogs = IridiumSkyblock.getInstance().getDatabaseManager().getIslandLogTableManager().getEntries(getIsland()).stream()
                 .filter(islandLog -> Arrays.stream(logActions).anyMatch(logAction -> logAction.equals(islandLog.getLogAction())))
-                .sorted(Comparator.comparing(IslandLog::getTime).reversed())
-                .collect(Collectors.toList());
+                .sorted(Comparator.comparing(IslandLog::getTime).reversed()).toList();
         int maxPage = (int) Math.ceil(islandLogs.size() / 10.00);
 
         return page + change > 0 && page + change <= maxPage;

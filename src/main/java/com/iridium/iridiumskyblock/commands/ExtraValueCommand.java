@@ -52,7 +52,7 @@ public class ExtraValueCommand extends Command {
         OfflinePlayer player = Bukkit.getOfflinePlayer(args[2]);
         User user = IridiumSkyblock.getInstance().getUserManager().getUser(player);
         Optional<Island> island = user.getIsland();
-        if (!island.isPresent()) {
+        if (island.isEmpty()) {
             sender.sendMessage(StringUtils.color(IridiumSkyblock.getInstance().getMessages().userNoIsland.replace("%prefix%", IridiumSkyblock.getInstance().getConfiguration().prefix)));
             return false;
         }
