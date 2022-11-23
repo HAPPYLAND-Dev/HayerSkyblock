@@ -190,6 +190,11 @@ public class IridiumSkyblock extends IridiumCore {
             });
         }, 1L, 12000L);
 
+//        Bukkit.getScheduler().runTaskTimerAsynchronously(this, () -> {
+//            System.out.println(u2l);
+//            System.out.println(users);
+//            System.out.println("-------");
+//        }, 1L, 20);
 //        // Auto recalculate islands
 //        if (getConfiguration().islandRecalculateInterval > 0) {
 //            Bukkit.getScheduler().scheduleSyncRepeatingTask(this, new Runnable() {

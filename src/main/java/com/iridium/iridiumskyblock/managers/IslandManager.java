@@ -454,7 +454,7 @@ public class IslandManager {
      */
     public @NotNull Optional<Island> getIslandViaLocation(@NotNull Location location) {
         if (!IridiumSkyblockAPI.getInstance().isIslandWorld(location.getWorld())) return Optional.empty();
-        Optional<Island> land = Optional.empty();
+        Optional<Island> land;
         for (User user: IridiumSkyblock.users) {
             var island = user.getIsland();
             if (island.isPresent() && island.get().isInIsland(location)) {
@@ -696,14 +696,15 @@ public class IslandManager {
                 player.sendMessage(StringUtils.color(IridiumSkyblock.getInstance().getMessages().islandDeleted.replace("%prefix%", IridiumSkyblock.getInstance().getConfiguration().prefix)));
             }
         });
-        getEntities(island, getWorld(), getEndWorld(), getNetherWorld()).thenAccept(entities ->
-                Bukkit.getScheduler().runTask(IridiumSkyblock.getInstance(), () ->
-                        entities.stream()
-                                .filter(entity -> entity instanceof Player)
-                                .map(entity -> (Player) entity)
-                                .forEach(PlayerUtils::teleportSpawn)
-                )
-        );
+        getEntities(island, getWorld(), getEndWorld(), getNetherWorld()).thenAccept(entities -> {
+            Bukkit.getScheduler().runTask(IridiumSkyblock.getInstance(), () -> {
+                entities.stream()
+                        .filter(entity -> entity instanceof Player)
+                        .map(entity -> (Player) entity)
+                        .forEach(PlayerUtils::teleportSpawn);
+            });
+        });
+        IridiumSkyblock.u2l.remove(island.getId());
     }
 
     /**
