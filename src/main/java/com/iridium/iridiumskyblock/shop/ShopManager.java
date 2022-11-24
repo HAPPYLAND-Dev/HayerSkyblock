@@ -184,6 +184,24 @@ public class ShopManager {
         IridiumSkyblock.getInstance().getShop().successSound.play(player);
     }
 
+    public void sellAll(Player player, ShopItem shopItem) {
+        int inventoryAmount = getMaterialAmount(player.getInventory(), shopItem.type);
+
+        if (inventoryAmount == 0) {
+            player.sendMessage(StringUtils.color(IridiumSkyblock.getInstance().getMessages().noSuchItem.replace("%prefix%", IridiumSkyblock.getInstance().getConfiguration().prefix)));
+            IridiumSkyblock.getInstance().getShop().failSound.play(player);
+            return;
+        }
+
+        ShopSellEvent shopSellEvent = new ShopSellEvent(player, shopItem, inventoryAmount);
+        Bukkit.getPluginManager().callEvent(shopSellEvent);
+        if (shopSellEvent.isCancelled()) return;
+
+        InventoryUtils.removeAmount(player.getInventory(), shopItem.type, inventoryAmount);
+        giveReward(player, shopItem, inventoryAmount);
+        IridiumSkyblock.getInstance().getShop().successSound.play(player);
+    }
+
     /**
      * Called when a player successfully sells an item in the shop.
      * Gives all rewards for that item to him.

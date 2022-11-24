@@ -6,8 +6,10 @@ import com.iridium.iridiumcore.utils.StringUtils;
 import com.iridium.iridiumskyblock.IridiumSkyblock;
 import com.iridium.iridiumskyblock.shop.ShopCategory;
 import com.iridium.iridiumskyblock.shop.ShopItem;
+import com.iridium.iridiumskyblock.shop.ShopManager;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
+import org.bukkit.event.inventory.ClickType;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
@@ -112,6 +114,8 @@ public class ShopCategoryGUI extends GUI {
             } else {
                 IridiumSkyblock.getInstance().getShopManager().sell(player, shopItem, shopItem.defaultAmount);
             }
+        } else if (ClickType.MIDDLE.equals(event.getClick()) && shopItem.isSellable()) {
+            IridiumSkyblock.getInstance().getShopManager().sellAll(player, shopItem);
         } else {
             IridiumSkyblock.getInstance().getShop().failSound.play(player);
         }
@@ -142,10 +146,11 @@ public class ShopCategoryGUI extends GUI {
             lore.add(StringUtils.color(IridiumSkyblock.getInstance().getShop().notSellableLore));
         }
 
-        IridiumSkyblock.getInstance().getShop().shopItemLore.stream()
-                .map(StringUtils::color)
+        IridiumSkyblock.getInstance().getShop().shopItemLore
                 .forEach(line -> lore.add(
-                        line.replace("%amount%", String.valueOf(item.defaultAmount))
+                        StringUtils.color(line
+                                .replace("%amount%", String.valueOf(item.defaultAmount))
+                                .replace("%name%", item.name))
                 ));
     }
 
