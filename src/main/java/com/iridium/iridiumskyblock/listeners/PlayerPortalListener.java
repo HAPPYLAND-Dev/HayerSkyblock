@@ -47,12 +47,12 @@ public class PlayerPortalListener implements Listener {
                 World world = event.getFrom().getWorld();
                 if (world == null) return;
                 if (world == islandManager.getNetherWorld()) {
-                    event.setTo(island.get().getCenter(islandManager.getWorld()));
+                    event.getPlayer().teleportAsync(LocationUtils.getSafeLocation(island.get().getCenter(islandManager.getWorld()), island.get()));
                 }
                 if (world == islandManager.getWorld()) {
-                    event.setTo(island.get().getCenter(islandManager.getNetherWorld()));
+                    event.getPlayer().teleportAsync(LocationUtils.getSafeLocation(island.get().getCenter(islandManager.getNetherWorld()), island.get()));
                 }
-
+                event.setCancelled(true);
                 return;
             }
 

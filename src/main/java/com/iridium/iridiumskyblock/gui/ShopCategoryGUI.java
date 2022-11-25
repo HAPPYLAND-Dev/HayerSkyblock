@@ -114,7 +114,7 @@ public class ShopCategoryGUI extends GUI {
             } else {
                 IridiumSkyblock.getInstance().getShopManager().sell(player, shopItem, shopItem.defaultAmount);
             }
-        } else if (ClickType.MIDDLE.equals(event.getClick()) && shopItem.isSellable()) {
+        } else if (event.getClick() == ClickType.DROP && shopItem.isSellable()) {
             IridiumSkyblock.getInstance().getShopManager().sellAll(player, shopItem);
         } else {
             IridiumSkyblock.getInstance().getShop().failSound.play(player);
