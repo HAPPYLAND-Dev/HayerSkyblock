@@ -1,7 +1,9 @@
 package com.iridium.iridiumskyblock.listeners;
 
+import com.iridium.iridiumcore.dependencies.xseries.XMaterial;
 import com.iridium.iridiumskyblock.IridiumSkyblock;
 import com.iridium.iridiumskyblock.SettingType;
+import com.iridium.iridiumskyblock.database.IslandBlocks;
 import com.iridium.iridiumskyblock.database.IslandSetting;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -18,6 +20,12 @@ public class BlockExplodeListener implements Listener {
                 return;
             }
             event.blockList().removeIf(block -> !island.isInIsland(block.getLocation()));
+            event.blockList().forEach(block -> {
+                IslandBlocks islandBlocks = IridiumSkyblock.getInstance().getIslandManager().getIslandBlock(island, XMaterial.matchXMaterial(block.getType()));
+                if (islandBlocks.getAmount() > 0) {
+                    islandBlocks.setAmount(islandBlocks.getAmount() - 1);
+                }
+            });
         });
     }
 
