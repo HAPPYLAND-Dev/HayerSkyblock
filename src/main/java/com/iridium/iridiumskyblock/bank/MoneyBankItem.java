@@ -46,6 +46,7 @@ public class MoneyBankItem extends BankItem {
             double money = Math.min(amount.doubleValue(), islandBank.getNumber());
             if (money > 0) {
                 islandBank.setNumber(islandBank.getNumber() - money);
+                IridiumSkyblock.getInstance().getEconomy().depositPlayer(player, money);
                 player.sendMessage(StringUtils.color(IridiumSkyblock.getInstance().getMessages().bankWithdrew
                         .replace("%prefix%", IridiumSkyblock.getInstance().getConfiguration().prefix))
                         .replace("%amount%", String.valueOf(money))
