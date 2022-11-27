@@ -43,13 +43,12 @@ public class MoneyBankItem extends BankItem {
 
         if (island.isPresent()) {
             IslandBank islandBank = IridiumSkyblock.getInstance().getIslandManager().getIslandBank(island.get(), this);
-            double money =  islandBank.getNumber();
-            double v = amount.doubleValue();
-            if (EconomyResponse.ResponseType.SUCCESS.equals(IridiumSkyblock.getInstance().getEconomy().depositPlayer(player, v).type)) {
-                islandBank.setNumber(islandBank.getNumber() - v);
+            double money = Math.min(amount.doubleValue(), islandBank.getNumber());
+            if (money > 0) {
+                islandBank.setNumber(islandBank.getNumber() - money);
                 player.sendMessage(StringUtils.color(IridiumSkyblock.getInstance().getMessages().bankWithdrew
                         .replace("%prefix%", IridiumSkyblock.getInstance().getConfiguration().prefix))
-                        .replace("%amount%", String.valueOf(v))
+                        .replace("%amount%", String.valueOf(money))
                         .replace("%type%", getDisplayName())
                 );
             } else {
